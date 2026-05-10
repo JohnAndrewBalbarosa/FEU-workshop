@@ -6,6 +6,34 @@
 .scho .section-head__index b { color: var(--bg); }
 .scho .section-head__aside { color: oklch(72% 0.012 60); }
 
+.scho__formula {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: clamp(1.25rem, 0.75rem + 1vw, 2rem);
+  border: 1px dashed oklch(100% 0 0 / 0.32);
+  background: oklch(100% 0 0 / 0.04);
+  font-size: 0.9rem;
+}
+.scho__formula-label {
+  font-size: var(--tiny);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: oklch(70% 0.012 60);
+}
+.scho__formula-eq {
+  color: var(--bg);
+  letter-spacing: 0.04em;
+  font-size: 1rem;
+}
+.scho__formula-eq sub { font-size: 0.7em; color: oklch(70% 0.012 60); }
+.scho__formula-out { color: var(--accent); letter-spacing: 0.04em; }
+@media (max-width: 720px) {
+  .scho__formula { grid-template-columns: 1fr; }
+}
+
 .scho__metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

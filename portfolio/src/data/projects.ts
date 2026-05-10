@@ -4,6 +4,7 @@ export type Domain =
   | 'lowlevel'
   | 'ai-engineering'
   | 'agentic-ai'
+  | 'webscraping'
   | 'polymath';
 
 export interface ProjectSlice {
@@ -60,7 +61,7 @@ export const DOMAINS: readonly DomainConfig[] = [
     kicker: 'C++ · low-level',
     title: 'Closer to the metal.',
     blurb:
-      'Parsers, lexers, AST passes and CMake builds. Where determinism matters more than ergonomics.',
+      'Parsers, lexers, AST passes, graph algorithms and CMake builds. Where determinism matters more than ergonomics.',
   },
   {
     key: 'ai-engineering',
@@ -68,7 +69,7 @@ export const DOMAINS: readonly DomainConfig[] = [
     kicker: 'AI engineering',
     title: 'Pipelines around models.',
     blurb:
-      'Local-first evaluation, judge models, prompt-strategy comparisons, provider-agnostic adapters.',
+      'Local-first evaluation, judge models, prompt-strategy comparisons, statistical detectors, provider-agnostic adapters.',
   },
   {
     key: 'agentic-ai',
@@ -79,12 +80,20 @@ export const DOMAINS: readonly DomainConfig[] = [
       'Long-lived planners, ephemeral workers, isolated MCP servers, deterministic file splices.',
   },
   {
-    key: 'polymath',
+    key: 'webscraping',
     index: '09',
+    kicker: 'Web scraping · automation',
+    title: 'Reading the web on purpose.',
+    blurb:
+      'Playwright-driven scrapers behind real logins, manifest-emitting pipelines, session-bootstrap captures, AWS Console overlays.',
+  },
+  {
+    key: 'polymath',
+    index: '10',
     kicker: 'Polymath margins',
     title: 'Things that don’t fit a box.',
     blurb:
-      'Mobile, browser automation, scrapers, side experiments, gifts shipped as web pages.',
+      'Mobile, side experiments, gifts shipped as web pages, the megarepo of in-progress directions.',
   },
 ] as const;
 
@@ -144,6 +153,15 @@ export const projects: Project[] = [
         ],
         tech: ['catalog-driven', 'evidence-first'],
       },
+      {
+        domain: 'webscraping',
+        headline: 'Playwright scratch dir for catalog-feeding scrapes.',
+        bullets: [
+          'Dedicated `playwright-scratch/scraper/run.mjs` bench (npm script `dev:scraper`) for pulling source corpus + reference patterns into the catalog.',
+          'Outputs feed the C++ detector’s pattern catalog — scrapes are write-once into `samples/` and `pattern_catalog/`.',
+        ],
+        tech: ['Playwright', 'Node.js'],
+      },
     ],
   },
 
@@ -162,9 +180,18 @@ export const projects: Project[] = [
           'Ephemeral developer workers each execute one linear path until a branch point — never write files directly.',
           'FileSystem MCP server is the only thing that can mutate code: `get_snippet` then `apply_snippet` performs a deterministic splice.',
           'Provider-agnostic LLM gateway — OpenAI + Gemini via official SDKs, Qwen via HuggingFace InferenceClient with pooled concurrency.',
-          'Phase 0 Playwright session bootstrap captures auth headers / CSRF / cookies for UI-only LLM endpoints, then runs browserless.',
         ],
-        tech: ['Python', 'MCP', 'DAG scheduling', 'Playwright'],
+        tech: ['Python', 'MCP', 'DAG scheduling'],
+      },
+      {
+        domain: 'webscraping',
+        headline: 'Phase-0 Playwright session bootstrap for UI-only providers.',
+        bullets: [
+          'Headless browser performs login to a UI-only LLM endpoint; network observer captures auth headers, cookies, request body pattern and anti-CSRF fields.',
+          'Session artifacts are encrypted and saved so subsequent calls run browserless against a raw HTTP profile (url, required headers, body template, retry/rate-limit settings).',
+          'Skipped automatically when an SDK-backed provider is configured — server reads its session profile from env directly.',
+        ],
+        tech: ['Playwright', 'browser interception', 'session capture'],
       },
     ],
   },
@@ -258,14 +285,15 @@ export const projects: Project[] = [
     primaryLanguage: 'JavaScript',
     slices: [
       {
-        domain: 'backend',
-        headline: 'Playwright-driven scrape with regular-vs-irregular flow detection.',
+        domain: 'webscraping',
+        headline: 'Authenticated FEU Paraverse scrape with current-term detection.',
         bullets: [
           'Detects the first pending column after fully-passed columns to identify the current term — irregular-student flow has a guarded placeholder.',
           'Pre-translation review menu lets you validate module counts, re-scan strict vs relaxed, or abort.',
-          'Outputs a `manifest.json` linking courses to module URLs + an optional `audit-strict-vs-relaxed.json` diff.',
+          'Outputs a `manifest.json` linking courses to module URLs + an optional `audit-strict-vs-relaxed.json` diff report.',
+          'Scraper runs locally with the user’s own login session — Paraverse is auth-protected, so no credentials in CI.',
         ],
-        tech: ['Node.js', 'Playwright'],
+        tech: ['Node.js', 'Playwright', 'manifest.json'],
       },
       {
         domain: 'ai-engineering',
@@ -283,19 +311,29 @@ export const projects: Project[] = [
   {
     name: 'GradesFeu',
     blurb:
-      'Tooling for FEU Tech SOLAR — grade scraping + analysis, schedule availability, PNG schedule reports, optional professor mapping from Excel.',
+      'Tooling for FEU Tech SOLAR — grade scraping + analysis, schedule availability, PNG schedule reports, optional professor mapping from Excel. Same `grades_checker` package powers ScheduleFeu.',
     url: 'https://github.com/JohnAndrewBalbarosa/GradesFeu',
     primaryLanguage: 'Python',
     slices: [
       {
-        domain: 'backend',
-        headline: 'Playwright scraper + analysis services + PNG report.',
+        domain: 'webscraping',
+        headline: 'Authenticated SOLAR scrape into a replayable JSON snapshot.',
         bullets: [
-          'Layered package — `cli / config / logic / models / scraping / services` — so the SOLAR scrape can be replayed against cached snapshots.',
-          'Schedule-availability checker takes a group size and emits a PNG schedule report straight into `src/.cache`.',
-          'Optional Excel professor-mapping layer, fed by the official term spreadsheet.',
+          'Playwright (Chromium) drives the SOLAR session under your login; scrape result is cached as `solar_data.json` for replay.',
+          'Layered package — `cli / config / logic / models / scraping / services` — separates the scrape transport from the parsing and analysis.',
+          'Optional Excel professor-mapping layer reads the official term spreadsheet (openpyxl) to enrich the schedule output.',
+          'Same package is published twice — `GradesFeu` (current) and `ScheduleFeu` (older snapshot) — both expose `grades-checker` + `schedule-checker` CLIs.',
         ],
-        tech: ['Python', 'Playwright', 'Pillow'],
+        tech: ['Python', 'Playwright', 'openpyxl', 'rich'],
+      },
+      {
+        domain: 'backend',
+        headline: 'Schedule-availability analysis + PNG report generation.',
+        bullets: [
+          '`schedule-checker --group-size N` computes group-availability windows from the cached scrape and emits a PNG schedule (Pillow) into `src/.cache/schedule_report.png`.',
+          'Pure-functional analysis layer — given the JSON snapshot, the entire report is reproducible without re-running the scrape.',
+        ],
+        tech: ['Python', 'Pillow'],
       },
     ],
   },
@@ -318,13 +356,14 @@ export const projects: Project[] = [
         tech: ['Node.js', 'ws', 'SQLite'],
       },
       {
-        domain: 'polymath',
-        headline: 'Playwright overlays directly on the live AWS Console.',
+        domain: 'webscraping',
+        headline: 'Headful Chromium overlays directly on the live AWS Console.',
         bullets: [
-          'Headful Chromium injects React overlays via `page.evaluate` — blinking highlights, navigation cues anchored to AWS selectors.',
-          'VS Code browser-agent observes both its own navigation and the developer’s manual clicks to build a deterministic step list.',
+          'Playwright in headful mode injects React overlays via `page.evaluate` — blinking highlights, navigation cues anchored to AWS selectors.',
+          'VS Code browser-agent observes both its own navigation and the developer’s manual clicks to build a deterministic step list — turns the Console itself into the deck.',
+          'No CDN reliance — assets are local-only; the workshop runs offline against the LAN.',
         ],
-        tech: ['Playwright', 'React', 'browser-agent'],
+        tech: ['Playwright', 'browser-agent', 'AWS Console'],
       },
     ],
   },
@@ -350,6 +389,72 @@ export const projects: Project[] = [
     ],
   },
 
+  /* ------------------------------------------------------------------ */
+  /* Egoist megarepo sub-projects — distinct work under one umbrella    */
+  /* ------------------------------------------------------------------ */
+
+  {
+    name: 'Egoist · textAIChecker',
+    blurb:
+      'A statistical AI-text detector that operates without any model — built from token-level information-theoretic features.',
+    url: 'https://github.com/JohnAndrewBalbarosa/Egoist/tree/main/personalProject/textAIChecker',
+    primaryLanguage: 'Python',
+    slices: [
+      {
+        domain: 'ai-engineering',
+        headline: 'No-model AI-text detection via burstiness + lexical features.',
+        bullets: [
+          'Computes type-token ratio, comma ratio, rare-word ratio (vs Zipf frequency cutoff), average sentence length, sentence variance, and burstiness (σ/μ on lengths).',
+          'Sentence-length distribution with configurable scale + rounding — measures how much text concentrates around a target window vs spreads.',
+          'Tokenisation via NLTK (`punkt` / `punkt_tab`); rare-word scoring via `wordfreq` (Zipf scale).',
+          'Deterministic + offline — no API calls, no model weights. The rubric is the algorithm.',
+        ],
+        tech: ['Python', 'nltk', 'wordfreq', 'numpy'],
+      },
+    ],
+  },
+
+  {
+    name: 'Egoist · Competitive C++',
+    blurb:
+      'Codeforces-style problem solutions in C++ — bit manipulation, ad-hoc, greedy, implementation.',
+    url: 'https://github.com/JohnAndrewBalbarosa/Egoist/tree/main/competitiveProgramming/C%2B%2B',
+    primaryLanguage: 'C++',
+    slices: [
+      {
+        domain: 'lowlevel',
+        headline: 'Hand-written CP solutions — bits, strings, ad-hoc.',
+        bullets: [
+          'A-Bit++, A-Team, A-Watermelon, A-WayTooLongWords, ABflipping, bits, bitstrings, weirdAlgorithm and friends.',
+          'Direct-to-stdout C++ — no framework, no STL contortions; one .cpp per problem, one binary per .cpp.',
+          'Compile target lives next to the source (e.g. `A-WayTooLongWords.exe`) — same workflow as the FEU CP grind.',
+        ],
+        tech: ['C++', 'Codeforces', 'CP grind'],
+      },
+    ],
+  },
+
+  {
+    name: 'Egoist · FinalProjectAlgo (Dijkstra Routing)',
+    blurb:
+      'CS0007 Algorithm final — passenger-routing system over a weighted graph using Dijkstra.',
+    url: 'https://github.com/JohnAndrewBalbarosa/Egoist/tree/main/academics/Final%20Projects/FinalProjectAlgo',
+    primaryLanguage: 'C++',
+    slices: [
+      {
+        domain: 'lowlevel',
+        headline: 'Dijkstra shortest-path over a passenger-route graph.',
+        bullets: [
+          'Modular C++ split — `data.h` / `function.h` for graph + utility types, `dijkstra.cpp` for the algorithm core.',
+          '`passenger.cpp` + `routeSpecs.cpp` model passenger demand and route metadata that feed the shortest-path solver.',
+          '`menu.cpp` is the CLI — text-driven interaction with the routing engine, no GUI dependencies.',
+          'Closed the loop on CS0007 (Algorithm) — final mark 4.00.',
+        ],
+        tech: ['C++', 'Dijkstra', 'graphs'],
+      },
+    ],
+  },
+
   {
     name: 'Mobile Programming (FEU Tech)',
     blurb:
@@ -359,7 +464,7 @@ export const projects: Project[] = [
     slices: [
       {
         domain: 'polymath',
-        headline: 'Kotlin / Android exercises (CS0011 — final grade 4.0).',
+        headline: 'Kotlin / Android exercises (CS0011 — final grade 4.00).',
         bullets: [
           'Standard Android project layout — `main`, `test`, `androidTest` sources.',
           'Exercises track activity lifecycle, view binding, and intent flow against the FEU Tech rubric.',

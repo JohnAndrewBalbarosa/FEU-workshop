@@ -8,6 +8,7 @@ export const DOMAIN_KEYS = [
   'lowlevel',
   'ai-engineering',
   'agentic-ai',
+  'webscraping',
   'polymath',
   'unassigned',
 ] as const;
@@ -20,6 +21,7 @@ export const DOMAIN_LABELS: Record<DomainKey, string> = {
   lowlevel: 'C++ · low-level',
   'ai-engineering': 'AI engineering',
   'agentic-ai': 'Agentic AI',
+  webscraping: 'Web scraping',
   polymath: 'Polymath',
   unassigned: 'Unassigned',
 };

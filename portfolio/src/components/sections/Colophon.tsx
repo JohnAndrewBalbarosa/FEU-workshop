@@ -19,7 +19,7 @@ export function Colophon() {
     <footer className="colophon section section--dark" id="contact">
       <div className="shell">
         <SectionHeader
-          index="12"
+          index="13"
           kicker="Colophon"
           title={<><span className="editorial">Say hello.</span> Let&rsquo;s build something deterministic.</>}
         />

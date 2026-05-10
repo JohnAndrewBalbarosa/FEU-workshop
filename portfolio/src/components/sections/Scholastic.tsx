@@ -19,11 +19,21 @@ export function Scholastic() {
     <section ref={root} className="scho section" id="scholastic">
       <div className="shell">
         <SectionHeader
-          index="10"
+          index="11"
           kicker="Scholastic"
           title="Receipts from the registrar."
           aside={`Scale ${SCHOLASTIC.scale} · ${SCHOLASTIC.totalUnits} units`}
         />
+
+        <div className="scho__formula">
+          <span className="scho__formula-label mono">def · GWA</span>
+          <span className="scho__formula-eq mono">
+            μ<sub>w</sub> = Σ(g<sub>i</sub> · u<sub>i</sub>) / Σu<sub>i</sub>
+          </span>
+          <span className="scho__formula-out mono">
+            = {SCHOLASTIC.cumulativeGwa.toFixed(4)} ∈ [1.00, 4.00]
+          </span>
+        </div>
 
         <div className="scho__metrics">
           <div className="scho__metric">

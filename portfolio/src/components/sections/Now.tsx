@@ -18,7 +18,7 @@ export function Now() {
     <section ref={root} className="now section" id="now">
       <div className="shell">
         <SectionHeader
-          index="11"
+          index="12"
           kicker="Currently"
           title="Right now, on the desk."
           aside={`Last updated ${new Date().toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}`}

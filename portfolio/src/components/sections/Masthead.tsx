@@ -54,6 +54,20 @@ export function Masthead() {
             </dl>
           </div>
 
+          <aside className="masthead__axes" aria-label="Polymath axes">
+            <header className="masthead__axes-head">
+              <span className="mono">∀ axis ∈ &#123; eng, math, sci, sec &#125;</span>
+              <span className="mono">σ ≈ broad</span>
+            </header>
+            <ul className="masthead__axes-list">
+              <li><span>Engineering</span><b className="mono">C++ · TS · Py · Kt</b></li>
+              <li><span>Mathematics</span><b className="mono">Discrete · Algo · Math Methods</b></li>
+              <li><span>Sciences</span><b className="mono">Physics · Stats · CS theory</b></li>
+              <li><span>Security</span><b className="mono">CTF · STRIDE · CDSS</b></li>
+              <li><span>Receipts</span><b className="mono">25 × 4.00 · GWA 3.60</b></li>
+            </ul>
+          </aside>
+
           <div className="masthead__cta">
             <a className="btn btn--accent" href="#work">Selected work →</a>
             <a className="btn btn--ghost" href={profile.socials.github} target="_blank" rel="noreferrer">
