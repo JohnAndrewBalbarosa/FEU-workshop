@@ -31,9 +31,18 @@ jobs:
       # Install per-workspace with `npm install` (not `npm ci`) so npm fixes the
       # optional-deps bug that prevents @rollup/rollup-linux-x64-gnu from
       # installing under a Windows-generated lockfile.
+      # Drop the root + per-workspace lockfiles before installing so npm picks
+      # the correct platform-specific optional deps (the lockfiles on disk were
+      # generated on Windows and don't include @rollup/rollup-linux-x64-gnu).
+      - name: Reset lockfiles for Linux install
+        run: |
+          rm -f package-lock.json
+          rm -f portfolio/package-lock.json
+          rm -f dashboard/package-lock.json
+
       - name: Install portfolio
         working-directory: portfolio
-        run: npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund --ignore-scripts=false
 
       - name: Install dashboard
         working-directory: dashboard
