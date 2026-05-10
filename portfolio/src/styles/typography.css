@@ -1,0 +1,73 @@
+html { font-size: 16px; }
+
+body {
+  font-family: var(--sans);
+  font-size: var(--body);
+  line-height: 1.55;
+  color: var(--ink);
+  font-feature-settings: "ss01", "cv11", "tnum";
+}
+
+/* Swiss: sans headings, tight tracking, restrained weight.
+   Serif italic is the single character move — used in .editorial only. */
+h1, h2, h3, .display {
+  font-family: var(--sans);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.display {
+  font-size: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+}
+
+h1 { font-size: var(--h1); }
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); letter-spacing: -0.01em; }
+
+/* Character move: serif italic for moments that need it */
+.editorial {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.015em;
+}
+
+.serif { font-family: var(--serif); }
+.mono  { font-family: var(--mono); font-feature-settings: "tnum"; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--tiny);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-feature-settings: "tnum";
+}
+
+.measure { max-width: var(--measure); }
+
+.lede {
+  font-family: var(--sans);
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  transition: background-size var(--dur) var(--ease), color var(--dur-fast) var(--ease);
+}
+a:hover { color: var(--accent); background-size: 100% 2px; }
+
+::selection { background: var(--ink); color: var(--bg); }

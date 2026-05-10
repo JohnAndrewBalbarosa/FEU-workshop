@@ -1,0 +1,95 @@
+.domain { padding-block: clamp(3.5rem, 2rem + 5vw, 7rem); }
+
+/* Alternate background for visual rhythm — every other domain inverts. */
+.domain:nth-of-type(even) { background: var(--surface-2); }
+
+.domain__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+}
+
+.slice {
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+  background: var(--bg);
+  border: 1px solid var(--rule-strong);
+  position: relative;
+  transition: border-color var(--dur) var(--ease);
+}
+.domain:nth-of-type(even) .slice { background: var(--surface); }
+.slice:hover { border-color: var(--accent); }
+
+.slice__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.slice__pos {
+  font-size: var(--tiny);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-feature-settings: "tnum";
+}
+.slice__project {
+  font-size: var(--tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background-image: linear-gradient(var(--accent), var(--accent));
+}
+
+.slice__headline {
+  font-family: var(--sans);
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+  color: var(--ink);
+}
+
+.slice__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+  flex: 1;
+}
+.slice__bullets li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.slice__bullets li::before {
+  content: "§";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.slice__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 880px) {
+  .slice { grid-column: span 12; }
+}

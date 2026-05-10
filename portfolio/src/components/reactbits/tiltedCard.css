@@ -1,0 +1,16 @@
+.tilted-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  perspective: 1000px;
+  display: block;
+}
+.tilted-card__inner {
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 240ms var(--ease);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilted-card__inner { transform: none !important; }
+}

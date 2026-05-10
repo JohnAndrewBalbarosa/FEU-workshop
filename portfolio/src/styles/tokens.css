@@ -1,0 +1,39 @@
+:root {
+  /* Swiss neutral surface + single vermilion accent — used sparingly */
+  --bg:        oklch(98% 0.003 90);
+  --surface:   oklch(100% 0 0);
+  --surface-2: oklch(95% 0.004 90);
+  --ink:       oklch(14% 0.01 60);
+  --ink-soft:  oklch(36% 0.012 60);
+  --ink-mute:  oklch(58% 0.012 60);
+  --rule:      oklch(14% 0.01 60 / 0.16);
+  --rule-strong: oklch(14% 0.01 60 / 0.85);
+  --accent:    oklch(56% 0.20 28);   /* vermilion — the one bold move */
+  --highlight: oklch(94% 0.10 95);
+
+  --serif: "Fraunces", "Times New Roman", Georgia, serif;
+  --sans:  "Inter", system-ui, -apple-system, sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Tighter, more disciplined scale */
+  --display: clamp(3rem, 1rem + 9vw, 9.5rem);
+  --h1:      clamp(2.2rem, 1.2rem + 3.2vw, 4rem);
+  --h2:      clamp(1.7rem, 1rem + 2.4vw, 2.8rem);
+  --h3:      clamp(1.2rem, 0.95rem + 0.9vw, 1.6rem);
+  --body:    clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
+  --small:   0.875rem;
+  --tiny:    0.72rem;
+  --measure: 60ch;
+
+  /* Grid — 8pt baseline */
+  --baseline: 0.5rem;
+  --section-y: clamp(4.5rem, 3rem + 5vw, 9rem);
+  --gutter:    clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem);
+  --shell-max: 1280px;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 560ms;
+}
