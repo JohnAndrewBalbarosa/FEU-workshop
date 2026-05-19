@@ -1,6 +1,13 @@
 .masthead {
-  padding-block: clamp(1.25rem, 1rem + 1.5vw, 2rem) clamp(3rem, 2rem + 4vw, 6rem);
+  padding-block: clamp(1rem, 0.75rem + 1vw, 1.5rem) clamp(1.5rem, 1rem + 2vw, 3rem);
 }
+.masthead--compact {
+  padding-block: clamp(0.75rem, 0.5rem + 0.75vw, 1rem) clamp(1rem, 0.75rem + 1vw, 1.5rem);
+}
+.masthead--compact .masthead__name { font-size: clamp(2.4rem, 1.4rem + 4vw, 5rem); }
+.masthead--compact .masthead__manifesto,
+.masthead--compact .masthead__axes,
+.masthead--compact .masthead__cta { display: none; }
 
 .masthead__top {
   display: flex;
@@ -12,7 +19,7 @@
 .masthead__rule {
   border: 0;
   border-top: 2px solid var(--ink);
-  margin: 0.6rem 0 clamp(2rem, 1rem + 3vw, 3.5rem);
+  margin: 0.5rem 0 clamp(1rem, 0.5rem + 1.5vw, 2rem);
   transform-origin: left;
 }
 
@@ -21,7 +28,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: clamp(1rem, 0.5rem + 1.5vw, 2rem);
-  row-gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  row-gap: clamp(0.85rem, 0.5rem + 1vw, 1.4rem);
   align-items: end;
 }
 

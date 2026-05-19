@@ -9,6 +9,17 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.8 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
 }
 
 img, picture, video, canvas, svg { display: block; max-width: 100%; }
@@ -30,7 +41,7 @@ button { font: inherit; cursor: pointer; background: none; border: 0; color: inh
 .rule {
   border: 0;
   border-top: 1px solid var(--rule-strong);
-  margin-block: clamp(2rem, 1rem + 3vw, 4rem);
+  margin-block: clamp(1rem, 0.5rem + 1.5vw, 2rem);
 }
 .rule--soft { border-top-color: var(--rule); }
 
@@ -97,9 +108,9 @@ button { font: inherit; cursor: pointer; background: none; border: 0; color: inh
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
-  gap: clamp(1rem, 0.5rem + 1vw, 2rem);
-  padding-bottom: 1.25rem;
-  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  gap: clamp(0.75rem, 0.5rem + 0.5vw, 1.25rem);
+  padding-bottom: 0.85rem;
+  margin-bottom: clamp(1.25rem, 0.75rem + 1.25vw, 2.5rem);
   border-bottom: 1px solid var(--rule-strong);
 }
 .section-head__index {

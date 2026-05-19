@@ -1,28 +1,3 @@
-import { useLenis } from './hooks/useLenis';
-import { ErrorBoundary } from './components/ui/ErrorBoundary';
-import { Masthead } from './components/sections/Masthead';
-import { Lede } from './components/sections/Lede';
-import { CredentialsStrip } from './components/sections/CredentialsStrip';
-import { HighlightsGrid } from './components/sections/HighlightsGrid';
-import { SkillDomains } from './components/sections/SkillDomains';
-import { Scholastic } from './components/sections/Scholastic';
-import { Now } from './components/sections/Now';
-import { Colophon } from './components/sections/Colophon';
-
-export default function App() {
-  useLenis();
-  return (
-    <ErrorBoundary>
-      <main>
-        <Masthead />
-        <Lede />
-        <CredentialsStrip />
-        <HighlightsGrid />
-        <SkillDomains />
-        <Scholastic />
-        <Now />
-        <Colophon />
-      </main>
-    </ErrorBoundary>
-  );
-}
+// App.tsx kept as a thin alias for backwards-compatibility — actual routing
+// lives in src/router.tsx and is mounted from src/main.tsx.
+export { RootLayout as default } from './layouts/RootLayout';

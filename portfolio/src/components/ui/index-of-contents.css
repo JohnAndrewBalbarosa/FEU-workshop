@@ -1,0 +1,88 @@
+.ioc {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule-strong);
+}
+.ioc__item {
+  border-bottom: 1px solid var(--rule);
+}
+.ioc__link {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) auto 1.5rem;
+  gap: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+  align-items: center;
+  padding: clamp(1.25rem, 0.75rem + 1.5vw, 2rem) 0;
+  text-decoration: none;
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--dur) var(--ease);
+}
+.ioc__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: translateX(-101%);
+  transition: transform 480ms var(--ease);
+  z-index: 0;
+}
+.ioc__link:hover::before { transform: translateX(0); }
+.ioc__link:hover { color: var(--bg); }
+.ioc__link:hover .ioc__kicker,
+.ioc__link:hover .ioc__meta,
+.ioc__link:hover .ioc__index { color: var(--accent-2); }
+.ioc__link > * { position: relative; z-index: 1; }
+
+.ioc__index {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 1rem + 1.5vw, 2.4rem);
+  letter-spacing: -0.02em;
+  color: var(--ink-mute);
+}
+.ioc__kicker {
+  font-size: var(--tiny);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.ioc__title {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+}
+.ioc__blurb {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+.ioc__meta {
+  font-size: var(--tiny);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+.ioc__arrow {
+  font-size: 1.6rem;
+  color: var(--ink);
+  transition: transform var(--dur) var(--ease);
+}
+.ioc__link:hover .ioc__arrow {
+  transform: translateX(0.35rem);
+  color: var(--bg);
+}
+
+@media (max-width: 720px) {
+  .ioc__link {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+  }
+  .ioc__meta, .ioc__arrow { display: none; }
+}

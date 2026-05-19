@@ -9,7 +9,9 @@
   --rule:      oklch(14% 0.01 60 / 0.16);
   --rule-strong: oklch(14% 0.01 60 / 0.85);
   --accent:    oklch(56% 0.20 28);   /* vermilion — the one bold move */
+  --accent-2:  oklch(72% 0.14 80);   /* warm ochre — editorial second accent */
   --highlight: oklch(94% 0.10 95);
+  --grain-opacity: 0.035;
 
   --serif: "Fraunces", "Times New Roman", Georgia, serif;
   --sans:  "Inter", system-ui, -apple-system, sans-serif;
@@ -24,10 +26,12 @@
   --small:   0.875rem;
   --tiny:    0.72rem;
   --measure: 60ch;
+  --measure-narrow: 38ch;
+  --measure-wide:   72ch;
 
   /* Grid — 8pt baseline */
   --baseline: 0.5rem;
-  --section-y: clamp(4.5rem, 3rem + 5vw, 9rem);
+  --section-y: clamp(2.25rem, 1.5rem + 2vw, 4rem);
   --gutter:    clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem);
   --shell-max: 1280px;
 

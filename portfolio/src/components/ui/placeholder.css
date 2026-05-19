@@ -1,0 +1,25 @@
+.placeholder {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+.placeholder img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(8%) contrast(1.02);
+}
+.placeholder__badge {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--bg);
+  color: var(--bg);
+  background: oklch(14% 0.01 60 / 0.55);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}

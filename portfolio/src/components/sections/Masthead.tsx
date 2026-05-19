@@ -3,7 +3,11 @@ import { profile } from '../../data/profile';
 import { useGsapReveal } from '../../hooks/useGsapReveal';
 import './masthead.css';
 
-export function Masthead() {
+interface MastheadProps {
+  variant?: 'full' | 'compact';
+}
+
+export function Masthead({ variant = 'full' }: MastheadProps = {}) {
   const root = useRef<HTMLElement>(null);
 
   useGsapReveal(root, [
@@ -12,7 +16,10 @@ export function Masthead() {
   ]);
 
   return (
-    <header ref={root} className="masthead section">
+    <header
+      ref={root}
+      className={`masthead section${variant === 'compact' ? ' masthead--compact' : ''}`}
+    >
       <div className="shell">
         <div className="masthead__top">
           <span className="eyebrow">Vol. 01 · Manila · {new Date().getFullYear()}</span>
