@@ -32,8 +32,8 @@ body::after {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse at 12% 0%, rgba(var(--quinary-rgb), 0.22) 0%, transparent 45%),
-    radial-gradient(ellipse at 88% 100%, rgba(var(--secondary-rgb), 0.14) 0%, transparent 45%);
+    radial-gradient(ellipse at 8% 0%, rgba(var(--quinary-rgb), 0.16) 0%, transparent 38%),
+    radial-gradient(ellipse at 92% 100%, rgba(var(--secondary-rgb), 0.1) 0%, transparent 38%);
 }
 
 img, picture, video, canvas, svg { display: block; max-width: 100%; }

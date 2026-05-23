@@ -19,7 +19,8 @@
   align-items: center;
   padding: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
   text-decoration: none;
-  background: rgba(var(--c-rgb), 0.06);
+  background: linear-gradient(rgba(45, 27, 78, 0.82), rgba(45, 27, 78, 0.82)), rgba(var(--c-rgb), 0.12);
+  backdrop-filter: blur(4px);
   color: var(--ink);
   border: var(--bw) solid var(--c);
   border-radius: var(--radius-card);
@@ -32,7 +33,7 @@
 .ioc__link:hover {
   transform: translate(-3px, -3px) rotate(-1deg);
   box-shadow: 12px 12px 0 var(--c), 0 0 30px rgba(var(--c-rgb), 0.45);
-  background: rgba(var(--c-rgb), 0.12);
+  background: linear-gradient(rgba(45, 27, 78, 0.78), rgba(45, 27, 78, 0.78)), rgba(var(--c-rgb), 0.2);
 }
 
 .ioc__index {
