@@ -1,3 +1,8 @@
 {
-  "installCommand": "rm -f package-lock.json portfolio/package-lock.json dashboard/package-lock.json && npm install --no-audit --no-fund"
+  "installCommand": "rm -f package-lock.json portfolio/package-lock.json dashboard/package-lock.json && npm install --no-audit --no-fund",
+  "buildCommand": "npm run build:portfolio",
+  "outputDirectory": "portfolio/dist",
+  "rewrites": [
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+  ]
 }
