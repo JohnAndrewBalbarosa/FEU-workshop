@@ -1,43 +1,94 @@
 :root {
-  /* Swiss neutral surface + single vermilion accent — used sparingly */
-  --bg:        oklch(98% 0.003 90);
-  --surface:   oklch(100% 0 0);
-  --surface-2: oklch(95% 0.004 90);
-  --ink:       oklch(14% 0.01 60);
-  --ink-soft:  oklch(36% 0.012 60);
-  --ink-mute:  oklch(58% 0.012 60);
-  --rule:      oklch(14% 0.01 60 / 0.16);
-  --rule-strong: oklch(14% 0.01 60 / 0.85);
-  --accent:    oklch(56% 0.20 28);   /* vermilion — the one bold move */
-  --accent-2:  oklch(72% 0.14 80);   /* warm ochre — editorial second accent */
-  --highlight: oklch(94% 0.10 95);
-  --grain-opacity: 0.035;
+  /* ── Maximalism / Dopamine DNA ──────────────────────────────────────────
+     Dark cosmic void + five screaming accents. Legacy variable names are
+     preserved (--bg, --ink, --rule…) so existing components inherit the new
+     look without markup churn; their meaning is remapped here. */
 
-  --serif: "Fraunces", "Times New Roman", Georgia, serif;
-  --sans:  "Inter", system-ui, -apple-system, sans-serif;
-  --mono:  "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  /* Base */
+  --bg:        #0D0D1A;            /* deep cosmic purple-black — the void */
+  --surface:   #2D1B4E;            /* dark purple container */
+  --surface-2: #3A2566;           /* lifted purple */
+  --ink:       #FFFFFF;            /* foreground — maximum contrast */
+  --ink-soft:  rgba(255, 255, 255, 0.82);
+  --ink-mute:  rgba(255, 255, 255, 0.56);
+  --rule:      rgba(255, 255, 255, 0.16);
+  --rule-strong: #FF3AF2;         /* default border = hot magenta */
+  --highlight: rgba(255, 230, 0, 0.18);
 
-  /* Tighter, more disciplined scale */
-  --display: clamp(3rem, 1rem + 9vw, 9.5rem);
-  --h1:      clamp(2.2rem, 1.2rem + 3.2vw, 4rem);
-  --h2:      clamp(1.7rem, 1rem + 2.4vw, 2.8rem);
-  --h3:      clamp(1.2rem, 0.95rem + 0.9vw, 1.6rem);
-  --body:    clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
-  --small:   0.875rem;
-  --tiny:    0.72rem;
+  /* The five accents — always five, rotated systematically */
+  --accent:      #FF3AF2;         /* 1 · magenta — electric energy */
+  --secondary:   #00F5D4;         /* 2 · cyan — digital glow */
+  --tertiary:    #FFE600;         /* 3 · yellow — attention grabber */
+  --quaternary:  #FF6B35;         /* 4 · orange — warmth chaos */
+  --quinary:     #7B2FFF;         /* 5 · purple — mystical depth */
+  --accent-2:    #00F5D4;         /* legacy alias → cyan */
+
+  /* RGB triplets for glow composition */
+  --accent-rgb:     255, 58, 242;
+  --secondary-rgb:  0, 245, 212;
+  --tertiary-rgb:   255, 230, 0;
+  --quaternary-rgb: 255, 107, 53;
+  --quinary-rgb:    123, 47, 255;
+
+  /* Fonts — geometric headings, clean body, comic display.
+     --serif kept as an alias to the heading face so legacy usages stay bold. */
+  --heading: "Outfit", system-ui, sans-serif;
+  --sans:    "DM Sans", system-ui, -apple-system, sans-serif;
+  --serif:   "Outfit", system-ui, sans-serif;
+  --display-font: "Bangers", "Outfit", system-ui, cursive;
+  --mono:    "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Aggressive type scale */
+  --display: clamp(3.5rem, 1rem + 11vw, 9rem);
+  --h1:      clamp(2.6rem, 1.4rem + 4.2vw, 5rem);
+  --h2:      clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  --h3:      clamp(1.4rem, 1rem + 1.2vw, 2rem);
+  --body:    clamp(1.05rem, 0.96rem + 0.4vw, 1.25rem);
+  --small:   0.95rem;
+  --tiny:    0.78rem;
   --measure: 60ch;
   --measure-narrow: 38ch;
   --measure-wide:   72ch;
 
-  /* Grid — 8pt baseline */
+  /* Rhythm — generous breathing room between sections */
   --baseline: 0.5rem;
-  --section-y: clamp(2.25rem, 1.5rem + 2vw, 4rem);
+  --section-y: clamp(4rem, 3rem + 5vw, 8rem);
   --gutter:    clamp(1.25rem, 0.5rem + 2.5vw, 2.5rem);
   --shell-max: 1280px;
 
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast: 160ms;
-  --dur: 280ms;
-  --dur-slow: 560ms;
+  /* Borders & radii — bold by default */
+  --bw:        4px;               /* standard border width */
+  --bw-heavy:  8px;
+  --radius-button:    9999px;
+  --radius-card:      24px;
+  --radius-container: 16px;
+
+  /* Glow shadows (soft, colored, luminous) */
+  --glow: 0 0 20px rgba(var(--accent-rgb), 0.5),
+          0 0 40px rgba(var(--secondary-rgb), 0.3);
+  --glow-lg: 0 0 40px rgba(var(--accent-rgb), 0.6),
+             0 0 80px rgba(var(--tertiary-rgb), 0.4),
+             0 0 120px rgba(var(--quinary-rgb), 0.3);
+
+  /* Hard shadows (offset, flat, stacked — 2× offset progression) */
+  --shadow-multi: 8px 8px 0 var(--tertiary), 16px 16px 0 var(--accent);
+  --shadow-multi-lg: 12px 12px 0 var(--secondary),
+                     24px 24px 0 var(--accent),
+                     36px 36px 0 var(--tertiary);
+
+  /* Text-shadow stacks */
+  --text-shadow-1: 2px 2px 0 var(--quinary);
+  --text-shadow-2: 2px 2px 0 var(--quinary), 4px 4px 0 var(--accent);
+  --text-shadow-3: 2px 2px 0 var(--quinary), 4px 4px 0 var(--accent), 6px 6px 0 var(--secondary);
+  --text-shadow-mega: 4px 4px 0 var(--quinary), 8px 8px 0 var(--accent), 12px 12px 0 var(--secondary);
+
+  --grain-opacity: 0.06;
+
+  /* Motion — bouncy & playful */
+  --ease:        cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --dur-fast: 200ms;
+  --dur:      300ms;
+  --dur-slow: 500ms;
 }

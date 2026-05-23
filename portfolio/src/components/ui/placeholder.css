@@ -7,19 +7,22 @@
   width: 100%;
   height: auto;
   display: block;
-  filter: grayscale(8%) contrast(1.02);
+  filter: saturate(1.1) contrast(1.04);
 }
 .placeholder__badge {
   position: absolute;
   top: 0.6rem;
   left: 0.6rem;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--bg);
+  padding: 0.3rem 0.6rem;
+  border: 2px solid var(--bg);
   color: var(--bg);
-  background: oklch(14% 0.01 60 / 0.55);
+  background: var(--tertiary);
+  border-radius: var(--radius-button);
+  font-family: var(--mono);
   font-size: 0.62rem;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  backdrop-filter: blur(4px);
+  box-shadow: 0 0 14px rgba(var(--tertiary-rgb), 0.6);
   pointer-events: none;
 }

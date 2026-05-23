@@ -1,31 +1,38 @@
-/* Wordmark — top-left brand mark */
+/* Wordmark — chunky brand mark with a glowing glyph. */
 .wordmark {
   display: inline-flex;
   align-items: baseline;
   gap: 0.5rem;
   text-decoration: none;
   color: var(--ink);
-  font-family: var(--serif);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--heading);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background-image: none;
+  text-transform: uppercase;
 }
 .wordmark__glyph {
-  font-size: 1.4em;
+  font-family: var(--display-font);
+  font-size: 1.6em;
   color: var(--accent);
   line-height: 0.8;
   transform: translateY(0.08em);
+  text-shadow: 2px 2px 0 var(--quinary), 4px 4px 0 var(--secondary);
+  transition: transform var(--dur) var(--ease-bounce);
 }
 .wordmark__initials {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   letter-spacing: 0.04em;
+  text-shadow: var(--text-shadow-1);
 }
 .wordmark__vol {
   font-size: var(--tiny);
-  color: var(--ink-mute);
-  letter-spacing: 0.22em;
+  color: var(--tertiary);
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
 }
-.wordmark:hover .wordmark__glyph { color: var(--accent-2); }
+.wordmark:hover .wordmark__glyph { transform: translateY(0.08em) rotate(-12deg) scale(1.15); }
 
 /* Tree breadcrumb */
 .tree-breadcrumb {
@@ -33,7 +40,8 @@
   flex-direction: column;
   gap: 0.1rem;
   font-size: var(--tiny);
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-mute);
 }
@@ -42,45 +50,48 @@
   gap: 0.5rem;
   white-space: pre;
 }
-.tree-breadcrumb__rail { color: var(--rule-strong); }
+.tree-breadcrumb__rail { color: var(--quinary); }
 .tree-breadcrumb a {
   color: var(--ink-mute);
   text-decoration: none;
-  border-bottom: 1px dotted transparent;
+  background-image: none;
+  border-bottom: 2px dotted transparent;
   transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .tree-breadcrumb a:hover {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
+  color: var(--secondary);
+  border-bottom-color: var(--secondary);
 }
 .tree-breadcrumb__leaf {
-  color: var(--ink);
-  font-weight: 500;
+  color: var(--tertiary);
+  font-weight: 700;
 }
 
-/* Root layout chrome */
+/* Root layout chrome — sticky header with glowing magenta underline. */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: oklch(98% 0.003 90 / 0.86);
-  backdrop-filter: saturate(140%) blur(8px);
-  border-bottom: 1px solid var(--rule);
+  z-index: 50;
+  background: rgba(13, 13, 26, 0.78);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: var(--bw) solid var(--accent);
+  box-shadow: 0 4px 24px rgba(var(--accent-rgb), 0.3);
 }
 .site-header__inner {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
-  padding-block: 0.85rem;
+  padding-block: 0.9rem;
 }
 .site-footer {
-  border-top: 1px solid var(--rule-strong);
+  border-top: var(--bw) dashed var(--secondary);
   margin-top: clamp(2rem, 1rem + 3vw, 4rem);
-  padding-block: 1.25rem 2rem;
+  padding-block: 1.5rem 2.5rem;
   font-family: var(--mono);
   font-size: var(--tiny);
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-mute);
   display: flex;
@@ -88,31 +99,34 @@
   gap: 1rem;
   flex-wrap: wrap;
 }
+.site-footer span:first-child { color: var(--tertiary); }
 
-/* Route transition overlay */
+/* Route transition overlay — bright magenta wipe. */
 .route-transition {
   position: fixed;
   inset: 0;
-  background: var(--ink);
+  background: linear-gradient(120deg, var(--accent), var(--quinary), var(--secondary));
   z-index: 100;
   pointer-events: none;
   transform: translateY(100%);
 }
 
-/* Back-to-parent link (used on child pages, no sibling links) */
+/* Back-to-parent link. */
 .back-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   font-family: var(--mono);
   font-size: var(--tiny);
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink-mute);
+  color: var(--secondary);
   text-decoration: none;
-  border-bottom: 1px dashed var(--rule);
+  background-image: none;
+  border-bottom: 2px dashed var(--secondary);
   padding-bottom: 0.25rem;
   margin-bottom: clamp(1rem, 0.5rem + 1vw, 1.75rem);
-  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), transform var(--dur) var(--ease-bounce);
 }
-.back-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.back-link:hover { color: var(--tertiary); border-bottom-color: var(--tertiary); transform: translateX(-4px); }

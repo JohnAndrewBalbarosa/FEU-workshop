@@ -22,7 +22,7 @@ export function RootLayout() {
       <footer className="site-footer">
         <div className="shell" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
           <span>© {new Date().getFullYear()} · J.A. Balbarosa</span>
-          <span>Set in Fraunces &amp; Inter · Manila</span>
+          <span>Set in Outfit &amp; DM Sans · Manila ✦</span>
         </div>
       </footer>
     </ErrorBoundary>

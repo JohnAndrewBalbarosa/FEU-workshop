@@ -102,14 +102,15 @@ export function Receipts() {
           <SectionHeader
             index="03"
             kicker="Colophon"
-            title={<>Set in two faces.</>}
+            title={<>Set in three faces.</>}
             aside="End of volume"
           />
           <p className="colophon-copy">
-            Display set in <em>Fraunces</em>; body and labels in <em>Inter</em>;
-            mono in <em>JetBrains Mono</em>. Built with React, Vite, GSAP, and
-            Lenis. Hosted on Vercel. The grain is a single SVG turbulence
-            filter; the page is light by intent, not accident.
+            Display set in <em>Bangers</em>; headings in <em>Outfit</em>; body
+            and labels in <em>DM Sans</em>; mono in <em>JetBrains Mono</em>.
+            Built with React, Vite, GSAP, and Lenis. Hosted on Vercel. The
+            patterns are pure CSS gradients; the page is loud by intent, not
+            accident.
           </p>
         </section>
       </div>

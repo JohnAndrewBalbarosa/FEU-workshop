@@ -1,4 +1,4 @@
-.colophon h2 .editorial { color: var(--accent); }
+.colophon h2 .editorial { font-size: 1.05em; }
 
 .colophon__grid {
   display: grid;
@@ -12,35 +12,40 @@
 .colophon__cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.85rem;
 }
-.colophon__cta .btn--ghost { border-color: oklch(100% 0 0 / 0.32); color: var(--bg); }
-.colophon__cta .btn--ghost:hover { background: var(--bg); color: var(--ink); }
 
 .colophon__links {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  border-top: 1px solid oklch(100% 0 0 / 0.22);
+  gap: 0.6rem;
 }
 .colophon__links li {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid oklch(100% 0 0 / 0.22);
+  padding: 0.9rem 1rem;
+  border: 3px solid var(--c, var(--accent));
+  border-radius: var(--radius-container);
+  background: rgba(var(--c-rgb, var(--accent-rgb)), 0.07);
   font-family: var(--sans);
   font-size: 1.05rem;
+  transition: transform var(--dur) var(--ease-bounce);
 }
-.colophon__links a {
-  color: var(--bg);
-  background-image: linear-gradient(var(--accent), var(--accent));
-}
+.colophon__links li:nth-child(4n+1) { --c: var(--accent);     --c-rgb: var(--accent-rgb); }
+.colophon__links li:nth-child(4n+2) { --c: var(--secondary);  --c-rgb: var(--secondary-rgb); }
+.colophon__links li:nth-child(4n+3) { --c: var(--tertiary);   --c-rgb: var(--tertiary-rgb); }
+.colophon__links li:nth-child(4n+4) { --c: var(--quaternary); --c-rgb: var(--quaternary-rgb); }
+.colophon__links li:hover { transform: translateX(6px) rotate(-1deg); }
+.colophon__links a { color: var(--ink); background-image: linear-gradient(var(--c, var(--accent)), var(--c, var(--accent))); }
+.colophon__links a:hover { color: var(--c, var(--accent)); }
 .colophon__links span {
   font-size: var(--tiny);
-  color: oklch(72% 0.012 60);
+  font-weight: 700;
+  color: var(--c, var(--accent));
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -50,10 +55,12 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-top: 1.5rem;
   font-family: var(--mono);
   font-size: var(--tiny);
+  font-weight: 700;
   letter-spacing: 0.14em;
-  color: oklch(70% 0.012 60);
+  color: var(--ink-mute);
   text-transform: uppercase;
   font-feature-settings: "tnum";
 }

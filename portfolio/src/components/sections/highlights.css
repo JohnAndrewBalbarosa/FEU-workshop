@@ -14,43 +14,57 @@
 .highlight--tall   { grid-column: span 4; grid-row: span 2; }
 .highlight--normal { grid-column: span 4; }
 
+/* Color rotation + alternating tilt for broken-grid energy. */
+.highlight:nth-child(5n+1) { --c: var(--accent);     --c-rgb: var(--accent-rgb); }
+.highlight:nth-child(5n+2) { --c: var(--secondary);  --c-rgb: var(--secondary-rgb); }
+.highlight:nth-child(5n+3) { --c: var(--tertiary);   --c-rgb: var(--tertiary-rgb); }
+.highlight:nth-child(5n+4) { --c: var(--quaternary); --c-rgb: var(--quaternary-rgb); }
+.highlight:nth-child(5n+5) { --c: var(--quinary);    --c-rgb: var(--quinary-rgb); }
+.highlight:nth-child(even) { transform: translateY(clamp(0px, 2vw, 1.5rem)) rotate(-1deg); }
+.highlight:nth-child(odd)  { transform: rotate(1deg); }
+
 .highlight__frame {
   position: relative;
   overflow: hidden;
-  background: var(--surface-2);
-  border: 1px solid var(--rule-strong);
+  background: var(--surface);
+  border: var(--bw) solid var(--c);
+  border-radius: var(--radius-card);
+  box-shadow: 8px 8px 0 var(--c);
   flex: 1;
   min-height: 220px;
+  transition: transform var(--dur) var(--ease-bounce), box-shadow var(--dur) var(--ease);
 }
 .highlight__frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: contrast(1.04) saturate(0.92);
+  filter: saturate(1.15) contrast(1.05);
   transition: filter var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
 }
 .highlight--tall .highlight__frame { min-height: 460px; }
-.highlight:hover .highlight__frame img {
-  filter: contrast(1.06) saturate(1);
-  transform: scale(1.015);
+.highlight:hover .highlight__frame {
+  transform: translate(-2px, -4px);
+  box-shadow: 12px 14px 0 var(--c), 0 0 30px rgba(var(--c-rgb), 0.45);
 }
+.highlight:hover .highlight__frame img { filter: saturate(1.3) contrast(1.08); transform: scale(1.04); }
 
 .highlight__cap {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.85rem;
-  padding: 0.85rem 0 0;
-  font-size: 0.88rem;
-  line-height: 1.4;
+  padding: 0.95rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
   color: var(--ink-soft);
-  border-top: 1px solid var(--rule);
-  margin-top: 0.85rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
 }
 .highlight__cap .mono {
   font-size: var(--tiny);
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ink-mute);
+  color: var(--c);
   padding-top: 0.15rem;
 }
 
@@ -59,5 +73,7 @@
   .highlight--wide,
   .highlight--tall,
   .highlight--normal { grid-column: span 12; grid-row: auto; }
+  .highlight:nth-child(even),
+  .highlight:nth-child(odd) { transform: none; }
   .highlight--tall .highlight__frame { min-height: 320px; }
 }

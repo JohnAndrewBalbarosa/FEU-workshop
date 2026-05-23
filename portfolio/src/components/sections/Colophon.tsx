@@ -58,7 +58,7 @@ export function Colophon() {
         <hr className="rule" style={{ borderColor: 'oklch(100% 0 0 / 0.18)', marginBlock: 'clamp(3rem, 2rem + 3vw, 4.5rem)' }} />
 
         <div className="colophon__foot">
-          <span>Set in Inter, Fraunces &amp; JetBrains Mono.</span>
+          <span>Set in Outfit, DM Sans &amp; Bangers.</span>
           <span>Built with React · GSAP · Lenis.</span>
           <span>© {new Date().getFullYear()} {profile.name}.</span>
         </div>

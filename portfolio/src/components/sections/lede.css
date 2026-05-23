@@ -10,52 +10,64 @@
 .lede__facts {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.4rem 2rem;
+  gap: 1.25rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--rule-strong);
+  border-top: var(--bw) dashed var(--secondary);
 }
+.lede__facts div {
+  padding: 0.85rem 1rem;
+  border: 3px solid var(--c, var(--accent));
+  border-radius: var(--radius-container);
+  background: rgba(var(--c-rgb, var(--accent-rgb)), 0.06);
+}
+.lede__facts div:nth-child(4n+1) { --c: var(--accent);     --c-rgb: var(--accent-rgb); }
+.lede__facts div:nth-child(4n+2) { --c: var(--secondary);  --c-rgb: var(--secondary-rgb); }
+.lede__facts div:nth-child(4n+3) { --c: var(--tertiary);   --c-rgb: var(--tertiary-rgb); }
+.lede__facts div:nth-child(4n+4) { --c: var(--quaternary); --c-rgb: var(--quaternary-rgb); }
 .lede__facts dt {
   font-family: var(--mono);
   font-size: var(--tiny);
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: 0.35rem;
+  color: var(--c, var(--accent));
+  margin-bottom: 0.4rem;
 }
-.lede__facts dd {
-  font-family: var(--sans);
-  font-size: 1rem;
-  line-height: 1.4;
-  color: var(--ink);
-}
+.lede__facts dd { font-family: var(--sans); font-size: 1rem; line-height: 1.4; color: var(--ink); font-weight: 500; }
 
 .lede__portrait {
   position: relative;
   margin: 0;
   overflow: hidden;
-  background: var(--surface-2);
-  border: 1px solid var(--rule-strong);
+  background: var(--surface);
+  border: var(--bw) solid var(--quinary);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-multi);
+  transform: rotate(1.5deg);
+  transition: transform var(--dur) var(--ease-bounce);
 }
+.lede__portrait:hover { transform: rotate(0deg) scale(1.01); }
 .lede__portrait img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  filter: grayscale(0.2) contrast(1.04);
+  filter: saturate(1.15) contrast(1.05);
   height: auto;
 }
 .lede__portrait figcaption {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.7rem 0.85rem;
-  border-top: 1px solid var(--rule-strong);
+  padding: 0.8rem 0.95rem;
+  border-top: var(--bw) solid var(--quinary);
   font-family: var(--mono);
   font-size: var(--tiny);
+  font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--ink-soft);
+  color: var(--secondary);
   text-transform: uppercase;
-  background: var(--surface);
+  background: rgba(var(--quinary-rgb), 0.12);
 }
 
 @media (max-width: 880px) {

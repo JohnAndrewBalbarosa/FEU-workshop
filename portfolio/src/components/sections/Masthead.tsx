@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { profile } from '../../data/profile';
 import { useGsapReveal } from '../../hooks/useGsapReveal';
+import { FloatingShapes } from '../ui/FloatingShapes';
 import './masthead.css';
 
 interface MastheadProps {
@@ -20,6 +21,7 @@ export function Masthead({ variant = 'full' }: MastheadProps = {}) {
       ref={root}
       className={`masthead section${variant === 'compact' ? ' masthead--compact' : ''}`}
     >
+      {variant === 'full' ? <FloatingShapes /> : null}
       <div className="shell">
         <div className="masthead__top">
           <span className="eyebrow">Vol. 01 · Manila · {new Date().getFullYear()}</span>

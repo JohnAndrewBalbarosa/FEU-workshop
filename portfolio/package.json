@@ -9,9 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fontsource/fraunces": "^5.0.20",
-    "@fontsource/inter": "^5.0.20",
+    "@fontsource/bangers": "^5.0.20",
+    "@fontsource/dm-sans": "^5.0.20",
     "@fontsource/jetbrains-mono": "^5.0.21",
+    "@fontsource/outfit": "^5.0.20",
     "gsap": "^3.12.5",
     "lenis": "^1.1.13",
     "react": "^18.3.1",
