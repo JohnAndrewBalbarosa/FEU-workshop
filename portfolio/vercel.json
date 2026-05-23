@@ -1,5 +1,4 @@
 {
-  "installCommand": "rm -f ../package-lock.json package-lock.json && npm install --no-audit --no-fund",
   "rewrites": [
     { "source": "/((?!assets/).*)", "destination": "/index.html" }
   ]

@@ -1,0 +1,3 @@
+{
+  "installCommand": "rm -f package-lock.json portfolio/package-lock.json dashboard/package-lock.json && npm install --no-audit --no-fund"
+}
