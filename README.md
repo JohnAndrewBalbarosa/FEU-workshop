@@ -46,3 +46,40 @@ npm run dev
 - Secrets scan: gitleaks
 
 CI does not deploy — Vercel handles deploys via its own GitHub integration once you connect the repo to each project.
+
+## Architecture (UML)
+
+```mermaid
+graph TD
+    Portfolio["🎨 Portfolio (Public)<br/>Vite + React + GSAP<br/>Static Site"]
+    Dashboard["🔒 Dashboard (Private)<br/>Next.js 15 + Vercel KV"]
+    
+    User1["👤 Public Visitor"]
+    User2["👤 Authenticated User"]
+    
+    subgraph "Portfolio Layer"
+        PortfolioUI["React Components<br/>(GSAP animations<br/>Lenis scroll)"]
+    end
+    
+    subgraph "Dashboard Layer"
+        LoginForm["🔐 Login Form<br/>(Env-based auth)"]
+        ServerActions["⚡ Server Actions<br/>(Input sanitization)"]
+        UI["Dashboard UI<br/>(Goals, Tasks)"]
+    end
+    
+    subgraph "Backend Services"
+        VercelKV["💾 Vercel KV<br/>(Redis)"]
+        Bcrypt["🔒 Bcrypt<br/>Password Hash"]
+    end
+    
+    User1 -->|Visit| Portfolio
+    Portfolio -->|Render| PortfolioUI
+    
+    User2 -->|Access| Dashboard
+    Dashboard -->|Login| LoginForm
+    LoginForm -->|Validate| Bcrypt
+    Bcrypt -->|Auth Token| ServerActions
+    ServerActions -->|Save/Load| VercelKV
+    ServerActions -->|Update| UI
+    UI -->|Display| User2
+```
