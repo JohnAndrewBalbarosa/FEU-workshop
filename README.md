@@ -1,85 +1,70 @@
 # FEU-workshop
 
-Monorepo with two Vercel projects:
+## Overview
 
-| App | Path | Stack | Vercel project |
-|-----|------|-------|---------------|
-| Public portfolio | `portfolio/` | Vite + React + GSAP + Lenis | `portfolio` |
-| Personal dashboard (private) | `dashboard/` | Next.js 15 App Router + Vercel KV | `dashboard` *(create new)* |
+Portfolio + private dashboard monorepo
 
-The portfolio is statically rendered. The dashboard is server-rendered, gated by an env-only username + bcrypt password hash, with Server Actions doing all input sanitization.
+Repository: [JohnAndrewBalbarosa/FEU-workshop](https://github.com/JohnAndrewBalbarosa/FEU-workshop)
 
-## Local development
+## Problem and Goal
+
+This project should be read as a technical build: it identifies a concrete workflow or research problem, implements a working system around that problem, and documents enough evidence for another person to understand, run, and evaluate the result.
+
+Primary goals:
+
+- Explain what the project does and who it is for.
+- Show the architecture and implementation choices.
+- Provide enough setup guidance for local review.
+- Report measured results when available.
+- Make limitations and next steps explicit instead of implying unverified impact.
+
+## System Design
+
+Current documented components:
+
+- Project files are organized at repository root; document the main modules as the project matures.
+
+Project tags:
+
+- To be tagged based on the final project stack.
+
+## Setup and Usage
+
+Use the commands below as the starting point for local setup. Verify environment variables, secrets, datasets, and external services before running production-like workflows.
 
 ```bash
-# Portfolio (Vite, port 5173)
-npm --workspace portfolio run dev
-
-# Dashboard (Next.js, port 3001)
-cd dashboard
-cp .env.example .env.local
 npm install
-npm run hash-password   # paste output into .env.local as DASHBOARD_PASSWORD_HASH
 npm run dev
 ```
 
-## First-time deploy of the dashboard
+## Evaluation Method
 
-1. **Generate the password hash locally** — never type it into the Vercel UI as a plain password:
-   ```bash
-   cd dashboard && npm run hash-password
-   ```
-2. **Create a Vercel project** for `dashboard/` (Framework preset: Next.js, Root directory: `dashboard`).
-3. **Set environment variables** in the new Vercel project:
-   - `DASHBOARD_USERNAME` — your username
-   - `DASHBOARD_PASSWORD_HASH` — the bcrypt hash from step 1
-   - `AUTH_SECRET` — `openssl rand -base64 48`
-4. **Provision Vercel KV** in the same project (Storage → KV → Create). The `KV_*` env vars auto-link.
-5. **Set the portfolio's `VITE_DASHBOARD_URL`** to the dashboard's Vercel URL so the Sign-in button points at the right host.
+- Define the project task and expected behavior.
+- Run representative examples or user flows.
+- Record correctness, speed, reliability, usability, and failure cases.
 
-## CI
+## Results
 
-`.github/workflows/ci.yml` runs on every PR and `main` push:
+- No validated quantitative results are published yet.
+- Current README status: implementation and usage are documented before formal measurement.
 
-- Portfolio: `tsc -b` + `vite build`
-- Dashboard: `tsc --noEmit` + `next build` (with dummy CI-only env)
-- Secrets scan: gitleaks
+## Interpretation
 
-CI does not deploy — Vercel handles deploys via its own GitHub integration once you connect the repo to each project.
+- The project can be described as implemented or in progress, but impact claims should stay limited until measurements are collected.
+- Use the evaluation plan below to turn the project into resume-ready, evidence-backed work.
 
-## Architecture (UML)
+## Limitations
 
-```mermaid
-graph TD
-    Portfolio["🎨 Portfolio (Public)<br/>Vite + React + GSAP<br/>Static Site"]
-    Dashboard["🔒 Dashboard (Private)<br/>Next.js 15 + Vercel KV"]
-    
-    User1["👤 Public Visitor"]
-    User2["👤 Authenticated User"]
-    
-    subgraph "Portfolio Layer"
-        PortfolioUI["React Components<br/>(GSAP animations<br/>Lenis scroll)"]
-    end
-    
-    subgraph "Dashboard Layer"
-        LoginForm["🔐 Login Form<br/>(Env-based auth)"]
-        ServerActions["⚡ Server Actions<br/>(Input sanitization)"]
-        UI["Dashboard UI<br/>(Goals, Tasks)"]
-    end
-    
-    subgraph "Backend Services"
-        VercelKV["💾 Vercel KV<br/>(Redis)"]
-        Bcrypt["🔒 Bcrypt<br/>Password Hash"]
-    end
-    
-    User1 -->|Visit| Portfolio
-    Portfolio -->|Render| PortfolioUI
-    
-    User2 -->|Access| Dashboard
-    Dashboard -->|Login| LoginForm
-    LoginForm -->|Validate| Bcrypt
-    Bcrypt -->|Auth Token| ServerActions
-    ServerActions -->|Save/Load| VercelKV
-    ServerActions -->|Update| UI
-    UI -->|Display| User2
-```
+- Results should only be treated as validated when this README includes the dataset, sample size, metric definition, and reproduction steps.
+- Any AI-generated, OCR-based, scraped, or heuristic output requires manual review before being used as ground truth.
+- Environment-dependent measurements such as latency, memory use, browser behavior, and API reliability should be re-measured on the target machine.
+
+## Recommendations and Future Work
+
+- Add a small benchmark or validation dataset.
+- Report sample size, success rate, error rate, and runtime where applicable.
+- Add screenshots, logs, or exported reports that support the measured results.
+
+## Documentation Standard
+
+This README follows a technical-project structure: overview, goal, system design, setup, evaluation method, results, interpretation, limitations, and recommendations. Update the Results section whenever new measurements are available so project claims stay evidence-backed.
