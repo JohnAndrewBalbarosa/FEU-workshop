@@ -8,33 +8,25 @@ Repository: [JohnAndrewBalbarosa/FEU-workshop](https://github.com/JohnAndrewBalb
 
 ## Problem and Goal
 
-This project should be read as a technical build: it identifies a concrete workflow or research problem, implements a working system around that problem, and documents enough evidence for another person to understand, run, and evaluate the result.
+**Problem.** A public project portfolio and a private management dashboard have different exposure and authentication requirements but share deployment and content workflows.
 
-Primary goals:
-
-- Explain what the project does and who it is for.
-- Show the architecture and implementation choices.
-- Provide enough setup guidance for local review.
-- Report measured results when available.
-- Make limitations and next steps explicit instead of implying unverified impact.
+**Goal.** Maintain both surfaces in one monorepo while keeping private dashboard access environment-gated.
 
 ## System Design
 
-Current documented components:
-
-- Project files are organized at repository root; document the main modules as the project matures.
-
-Project tags:
-
-- To be tagged based on the final project stack.
+- `portfolio/`: public Vite/React portfolio.
+- `dashboard/`: private Next.js dashboard and server-side actions.
+- Root package scripts coordinate workspaces; `vercel.json` defines deployment behavior.
 
 ## Setup and Usage
-
-Use the commands below as the starting point for local setup. Verify environment variables, secrets, datasets, and external services before running production-like workflows.
 
 ```bash
 npm install
 npm run dev
+
+# Or run a workspace directly
+npm --prefix portfolio run dev
+npm --prefix dashboard run dev
 ```
 
 ## Evaluation Method
